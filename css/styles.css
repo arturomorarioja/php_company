@@ -210,6 +210,7 @@ form {
         background-color: var(--colorBackground);
     }
     input[type="submit"] {
+        cursor: pointer;
         margin-top: 0.5rem;
         padding: 0.5rem 2rem;
         border: thin solid var(--colorTertiary);
@@ -221,6 +222,9 @@ form {
     label {
         display: inline-block;
         width: var(--widthLabel);
+    }
+    button {
+        cursor: pointer;
     }
 }
 

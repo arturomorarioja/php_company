@@ -5,7 +5,11 @@ require_once 'ApiConfig.php';
 class ApiConnection extends ApiConfig
 {
 
-    // Formats customer parameters according to the content type x-www-form-urlencoded
+    /**
+     * Formats customer parameters according to the content type x-www-form-urlencoded
+     * @param array   The parameters to encode
+     * @return string A string with the encoded parameters
+     */
     private function encodeParams(array $params): string
     {
         $encodedParams = '';
@@ -15,6 +19,13 @@ class ApiConnection extends ApiConfig
         return substr($encodedParams, 1);
     }
 
+    /**
+     * Consumes the API
+     * @param string The API endpoint to consume
+     * @param string The HTTP method to use
+     * @param array  An array with request parameters
+     * @return array The API response
+     */
     protected function apiCall(string $endpoint, string $method = 'GET', array $params = []): array 
     {
         try {
@@ -50,10 +61,10 @@ class ApiConnection extends ApiConfig
             }
             
             curl_setopt($ch, CURLOPT_URL, self::API_BASE_URL . $endpoint);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_HEADER, false);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);     // Return a string instead of outputting the response
+            curl_setopt($ch, CURLOPT_HEADER, false);            // The header will not be part of the response output
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);        // Do not check for HTTPS (should be 1 in production)
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);        // Do not verify the SSL certificate
             curl_setopt($ch, CURLOPT_HTTPHEADER, $httpHeader);
             
             $response = json_decode(curl_exec($ch), true);

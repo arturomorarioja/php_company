@@ -1,11 +1,13 @@
 <?php
-    define('HOME', 'home');
-    define('CUSTOMERS', 'customers');
 
-    $menuOption = HOME;
-    if (isset($_GET['m'])) {
-        $menuOption = trim($_GET['m']);
-    }
+define('HOME', 'home');
+define('CUSTOMERS', 'customers');
+
+$menuOption = HOME;
+if (isset($_GET['m'])) {
+    $menuOption = trim($_GET['m']);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -176,7 +178,7 @@
         ?>
     </main>
     <footer>
-        <p>&copy; 2022-2024 Arturo Mora-Rioja</p>
+        <p>&copy; 2022-2025 Arturo Mora-Rioja</p>
         <p class="small">Homepage text by <a href="https://chatgpt.com/" 
             target="_blank" title="ChatGPT 4o">ChatGPT 4o</a></p>
         <p class="small">Company picture by <a href="https://www.pexels.com/@polina-zimmerman/" 

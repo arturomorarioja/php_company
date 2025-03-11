@@ -4,7 +4,8 @@
  * Customer class
  * 
  * @author  Arturo Mora-Rioja
- * @version 1.0, September 2022
+ * @version 1.0.0 September 2022
+ * @version 1.0.1 March 2025. JavaDoc comments added
  */
 
 require_once 'ApiConnection.php';
@@ -13,6 +14,14 @@ class Customer extends ApiConnection
 {
     const BASE_ENDPOINT = 'customers';
 
+    /**
+     * Creates an associative array with user data
+     * @param string The username
+     * @param string The user's first name
+     * @param string The user's last name
+     * @param string The user's address
+     * @return array An associative array with user data
+     */
     private function groupParams(string $username, string $firstName, string $lastName, string $address): array
     {
         return [
@@ -24,6 +33,10 @@ class Customer extends ApiConnection
         ];
     }
 
+    /**
+     * Retrieves all users
+     * @return array An associative array with the API response 
+     */
     public function getAll(): array 
     {
         $customers = $this->apiCall(self::BASE_ENDPOINT);
@@ -34,6 +47,11 @@ class Customer extends ApiConnection
         }, $customers);
     }
 
+    /**
+     * Retrieves a user by its username
+     * @param string The username
+     * @return array An associative array with the API response 
+     */
     public function getByUsername(string $username): array
     {
         $customer = $this->apiCall(self::BASE_ENDPOINT, 'GET', ['user_name' => $username]);
@@ -46,12 +64,29 @@ class Customer extends ApiConnection
         }
     }
 
+    /**
+     * Inserts a user
+     * @param string The username
+     * @param string The user's first name
+     * @param string The user's last name
+     * @param string The user's address
+     * @return array An associative array with the API response 
+     */
     public function insert(string $username, string $firstName, string $lastName, string $address): array
     {
         return $this->apiCall(self::BASE_ENDPOINT, 'POST', 
             $this->groupParams($username, $firstName, $lastName, $address));
     }
 
+    /**
+     * Updates a user
+     * @param string The username
+     * @param string The user's first name
+     * @param string The user's last name
+     * @param string The user's address
+     * @return array An associative array with the API response 
+     *               or an error message
+     */
     public function update(string $username, string $firstName, string $lastName, string $address): array 
     {
         $customer = $this->getByUsername($username);
@@ -64,6 +99,12 @@ class Customer extends ApiConnection
         }
     }
 
+    /**
+     * Deletes a user
+     * @param string The username
+     * @return array An associative array with the API response 
+     *               or an error message
+     */
     public function delete(string $username): array
     {
         $customer = $this->getByUsername($username);
